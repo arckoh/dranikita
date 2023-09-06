@@ -1,0 +1,69 @@
+<%- include('../../partials/header.ejs') %>
+
+  <body>
+
+    <%- include('../../partials/navbar.ejs') %>
+
+      <div class="container">
+
+
+
+        <div class="card">
+
+          <div class="card-header">
+            <h3>Listas de artigos &#128195;</h3>
+            <a class="btn btn-success" href="/admin/articles/new">+ Criar artigo</a>
+          </div>
+
+          <div class="card-body">
+
+            <table class="table table-striped">
+              
+              <thead>        
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Slug</th>
+                  <th scope="col">Catégoria</th>
+                  <th scope="col">Ação</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% articles.forEach(article=> { %>
+                  <tr>
+                    <th scope="row"><%= article.id %></th>
+                    <td><%= article.title %></td>
+                    <td><%= article.slug %></td>
+                    <td>
+                      <% categories.forEach(category => { %>
+                        <% if(category.id == article.categoryId){ %>
+                          <%= category.title %>
+                        <% } %>
+                      <% }) %>
+                    </td>
+                    <td>
+
+                      <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning">Editar</a>
+                     
+                      <form method="post" action="/articles/delete" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= article.id %>">
+                        <button class="btn btn-danger">Deletar</button>
+                      </form>
+                      
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+  </body>
+
+  <%- include('../../partials/footer.ejs') %>

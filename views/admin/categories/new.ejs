@@ -1,0 +1,35 @@
+<%- include('../../partials/header.ejs') %>
+
+<body>
+
+<%- include('../../partials/navbar.ejs') %>
+
+    <div class="container">
+        
+      <div class="card">
+
+      
+        <div class="card-header">
+          <h3>Nova catégoria</h3>
+        </div>
+
+        <div class="card-body">
+          <form method="POST" class="form-group" action="/categories/save">
+
+            <label>Titulo da catégoria: </label>
+            <input placeholder="Entre o titulo da catégoria aqui" name="title" class="form-control">
+            <small class="form-text text-muted">Cuidado com a criação de catégoria ela relaciona todos os artigos &#128552;</small>
+            <br>
+            <br>
+            <button class="btn btn-success">Validar</button>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+</body>
+
+<%- include('../../partials/footer.ejs') %>
