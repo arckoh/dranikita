@@ -28,14 +28,23 @@ app.use("/", categoriesController);
 app.use("/", articlesController);
 app.get("/", (req, res) => {
 
-    Category.findAll().then(categories => {
-        Article.findAll().then(articles => {
+
+
+    Article.findAll({
+        order: [
+            ['id', 'DESC'],
+        ],
+        limit: 4
+    }).then(articles => {
+
+        Category.findAll().then(categories => {
             res.render("index", {
                 categories: categories,
                 articles: articles
             });
-        })
-    });
+        });
+
+    })
 });
 
 app.get("/category/:slug", (req, res) => {
