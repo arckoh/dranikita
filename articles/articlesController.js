@@ -20,7 +20,7 @@ router.get("/admin/articles", adminAuth , (req, res) => {
 });
 
 
-router.get("/admin/articles/new", (req, res) => {
+router.get("/admin/articles/new", adminAuth , (req, res) => {
     Category.findAll().then(categories => {
         res.render("admin/articles/new", {
             categories: categories
@@ -48,7 +48,7 @@ router.post("/articles/save", (req, res) => {
 
 });
 
-router.get("/admin/articles/edit/:id", (req, res) => {
+router.get("/admin/articles/edit/:id", adminAuth , (req, res) => {
 
     var id = req.params.id;
 

@@ -28,7 +28,7 @@ app.use(express.static('public'));
 app.use(session({
     secret: "chocolatAuLait",
     cookie: {
-        maxAge: 30000
+        maxAge: 60000
     },
     resave: true,
     saveUninitialized: true
