@@ -3,8 +3,9 @@ const router = express.Router();
 const slugify = require('slugify');
 const Article = require("./Article");
 const Category = require("../categories/Category");
+const adminAuth = require("../middlewares/adminAuth");
 
-router.get("/admin/articles", (req, res) => {
+router.get("/admin/articles", adminAuth , (req, res) => {
 
     Article.findAll().then(articles => {
 

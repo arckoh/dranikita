@@ -4,9 +4,14 @@ const bodyParser = require("body-parser");
 const connection = require("./database/database");
 const Article = require("./articles/Article");
 const Category = require("./categories/Category");
+const User = require("./users/User");
+const session = require("express-session");
+
+
 
 const categoriesController = require("./categories/categoriesController");
 const articlesController = require("./articles/articlesController");
+const usersController = require('./users/usersController');
 
 connection
     .authenticate()
@@ -20,12 +25,35 @@ connection
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+app.use(session({
+    secret: "chocolatAuLait",
+    cookie: {
+        maxAge: 30000
+    },
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/", categoriesController);
 app.use("/", articlesController);
+app.use("/", usersController);
+
+app.get("/session", (req, res) => {
+    req.session.treinamento = "formation";
+    req.session.year = 2023;
+    res.send("Session criada");
+});
+
+app.get("/leitura", (req, res) => {
+    res.json({
+        treinamento: req.session.treinamento,
+        ano: req.session.year
+    })
+});
+
 app.get("/", (req, res) => {
 
 
